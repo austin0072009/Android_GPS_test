@@ -64,7 +64,9 @@ class MainActivity : AppCompatActivity() {
 
         }
         Btn_4.setOnClickListener {
-
+            val intent = Intent();
+            intent.setClass(this, DrivingDetect::class.java)
+            startActivity(intent)
         }
      /*   Btn_zc.setOnClickListener {
             firstFragment = ZeroCalibration()
