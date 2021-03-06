@@ -1,5 +1,6 @@
 package com.example.sensortest
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
@@ -12,8 +13,9 @@ class RecordFunction : AppCompatActivity() {
 
     var content: String = ""
     var curTime = 0
-    val file = File(Environment.getExternalStorageDirectory(), "Record_Gps.txt")
+    val file = File("data/data/com.example.sensortest/GPS_DATA_RECORD.txt")
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_function)

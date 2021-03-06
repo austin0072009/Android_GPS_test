@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,10 +10,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Btn_Record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Record"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_Time"
+                android:layout_width="191dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="time"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="#F44336"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/motion0"
@@ -20,8 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="ACCELERATION:"
+            android:text="@string/Text_motion0"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -31,8 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="BEARING:"
+            android:text="@string/Text_motion1"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -42,8 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="DISTANCE:"
+            android:text="@string/Text_motion2"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -53,8 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="SPEED:"
+            android:text="@string/Text_motion3"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -64,8 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="LON,LAT:"
+            android:text="@string/Text_motion4"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -79,7 +105,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DrivingEventDetect"
+                android:text="@string/Text_title"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@android:color/background_dark"
@@ -91,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30sp"
-                android:text="转弯情况:"
+                android:text="@string/Text_Subtitle1"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -109,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30sp"
-                android:text="制动情况:"
+                android:text="@string/Text_Subtitle2"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 

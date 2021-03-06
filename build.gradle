@@ -3,11 +3,18 @@ buildscript {
     ext.kotlin_version = '1.4.10'
     ext.anko_version = '0.10.8'
     repositories {
-        //  google()
-        //   jcenter()
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        jcenter()
+        /*
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        mavenCentral()
+        jcenter(){ url 'https://jcenter.bintray.com/'}*/
+        google()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+
+
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
@@ -20,12 +27,19 @@ buildscript {
 
 allprojects {
     repositories {
+        repositories {
+            jcenter()
+       /*     maven {
+                url 'https://maven.google.com/'
+                name 'Google'
+            }
+            mavenCentral()
+            jcenter(){ url 'https://jcenter.bintray.com/'}
+            maven { url 'https://jitpack.io' }*/
+            google()
+            maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        //  google()
-        //  jcenter()
+        }
     }
 }
 
