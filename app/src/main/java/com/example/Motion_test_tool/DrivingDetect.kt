@@ -1,4 +1,4 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

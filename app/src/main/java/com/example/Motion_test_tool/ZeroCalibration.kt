@@ -1,4 +1,4 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
 import android.content.Context
 import android.hardware.Sensor

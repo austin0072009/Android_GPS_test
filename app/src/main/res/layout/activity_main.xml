@@ -65,6 +65,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="0.05"
+                android:enabled="false"
                 android:text="开车风格分数评定" />
 
             <Space

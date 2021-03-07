@@ -1,4 +1,4 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
 import android.app.Service
 import android.content.Context
@@ -8,12 +8,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.*
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import threeDvector.Rotate
 import threeDvector.Slerp
 import threeDvector.Vec3D

@@ -1,9 +1,8 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_record_function.*
 import java.io.*
@@ -12,7 +11,7 @@ import java.io.*
 class RecordFunction : AppCompatActivity() {
 
     var content: String = ""
-    var curTime = 0
+    var curTime :String ?= null
     val file = File("data/data/com.example.sensortest/GPS_DATA_RECORD.txt")
 
     @SuppressLint("SetTextI18n")
@@ -21,8 +20,8 @@ class RecordFunction : AppCompatActivity() {
         setContentView(R.layout.activity_record_function)
 
         var it = getIntent()
-        curTime = it.getIntExtra("Time", 10)
-        Record_Time.text = "记录了"+curTime.toString()+  "秒的GPS信息"
+        curTime = it.getStringExtra("Time")
+        Record_Time.text = "记录了"+curTime+  "秒的GPS信息"
 
         btn_listener()
     }

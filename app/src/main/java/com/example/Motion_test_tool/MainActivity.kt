@@ -1,4 +1,4 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,14 +16,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_listener()
+        btnListener()
     }
 
     override fun onResume() {
         super.onResume()
-        var it = getIntent()
-
-        curTime = it.getIntExtra("Time",0)
 
 
 
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         Btn_zc.visibility = View.VISIBLE
     }
     */
-    private fun btn_listener() {
+    private fun btnListener() {
 
         Btn_2.setOnClickListener {
             val intent = Intent();
@@ -58,8 +55,6 @@ class MainActivity : AppCompatActivity() {
         Btn_3.setOnClickListener {
             val intent = Intent();
             intent.setClass(this, RecordFunction::class.java)
-            intent.putExtra("Time",curTime)
-
             startActivity(intent)
 
         }

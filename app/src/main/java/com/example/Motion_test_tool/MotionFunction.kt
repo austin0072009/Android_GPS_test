@@ -1,7 +1,8 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -40,7 +41,7 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
 
     lateinit var time: LocalTime;
     var curTime = "11111"
-    var curTime2 = ""
+    var curTime2 = 0
     var record_Time = 0
 
 
@@ -162,6 +163,7 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_motion_function)
 
+
         time = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalTime.now()
         } else {
@@ -190,6 +192,15 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
 //
 //        }
 
+        if(isWorked())
+        {
+            var intent = Intent()
+            intent.setClass(this, MotionService::class.java)
+
+            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+            Btn_Record.text = "Stop"
+            click = 1
+        }
         btnListener()
 
     }
@@ -202,14 +213,7 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
 //            locationManager.removeUpdates(locationListener)
 //        }
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            curTime = (time.toSecondOfDay() - record_Time).toString()
-            val it = Intent()
-            it.setClass(this, MainActivity::class.java)
-            it.putExtra("Time", curTime)
-            startActivity(it)
-        }
-        toast("RECORD PAUSE")
+
 
     }
 
@@ -224,11 +228,15 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
 //            toast("刷新...GPS数据持续获取中")
 //            motion_GPS(locationManager)
 //        }
+
+
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        toast("Close")
+
+       // toast("Close")
     }
 
 //    //申请下位置权限后，要刷新位置信息
@@ -250,7 +258,7 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
         showLocation(motion4, locationManager)
         showBearing(motion1, locationManager)
         showDistance(motion2, locationManager)
-        showAcceleratioin(motion0, locationManager)
+        showAcceleration(motion0, locationManager)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -304,31 +312,39 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
     fun showSpeed(textview: TextView, locationManager: LocationManager) {
         textview.text = "SPEED: " + getLocation(locationManager)?.speed.toString()
         Log.v("speed", "Time" + time + "SPEED: " + getLocation(locationManager)?.speed.toString())
-        save_Gps(locationManager, "#speed: " + "Time" + time + "SPEED: " + getLocation(locationManager)?.speed.toString())
+        save_Gps(locationManager, "###speed### " + "Time:" + curTime2.toString() + "s   SPEED: " + getLocation(locationManager)?.speed.toString())
     }
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.M)
     fun showBearing(textview: TextView, locationManager: LocationManager) {
         textview.text = "BEARING: " + getLocation(locationManager)?.bearing.toString()
+        save_Gps(locationManager, "###bearing### " + "Time:" + curTime2.toString() + "s   BEARING: " + getLocation(locationManager)?.bearing.toString())
+
     }
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.M)
     fun showAltitude(textview: TextView, locationManager: LocationManager) {
         textview.text = "ALTITUDE: " + getLocation(locationManager)?.altitude.toString()
+        save_Gps(locationManager, "###altitude### " + "Time:" + curTime2.toString() + "s   ALT: " + getLocation(locationManager)?.altitude.toString())
+
     }
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.M)
     fun showLatitude(textview: TextView, locationManager: LocationManager) {
         textview.text = "LATITUDE: " + getLocation(locationManager)?.latitude.toString()
+        save_Gps(locationManager, "###latitude### " + "Time:" + curTime2.toString() + "s   LAT: " + getLocation(locationManager)?.latitude.toString())
+
     }
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.M)
     fun showLongitude(textview: TextView, locationManager: LocationManager) {
-        textview.text = "SPEED: " + getLocation(locationManager)?.longitude.toString()
+        textview.text = "LONGITUDE: " + getLocation(locationManager)?.longitude.toString()
+        save_Gps(locationManager, "###longitude### " + "Time:" + curTime2.toString() + "s   LONG: " + getLocation(locationManager)?.longitude.toString())
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -359,14 +375,16 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
     }
 
     @SuppressLint("SetTextI18n")
+
     @RequiresApi(Build.VERSION_CODES.M)
-    fun showAcceleratioin(textview: TextView, locationManager: LocationManager) {
+    fun showAcceleration(textview: TextView, locationManager: LocationManager) {
         var curSpeed = this.getLocation(locationManager)!!.speed
 
         if (distance > 0)
             acceleration = (curSpeed * curSpeed / (2 * distance)).toFloat()
 
         textview.text = "ACCELERATION:  " + acceleration.toString();
+
     }
 
     //获取位置信息
@@ -416,6 +434,7 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
                 stopService(intent)
 
                 mBound = false
+
             }
         }
 
@@ -446,13 +465,12 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
     override fun updateTime(curTime: String) {
 
 
-        runOnUiThread(object : Runnable
-        {
+        runOnUiThread(object : Runnable {
             @RequiresApi(Build.VERSION_CODES.O)
-            override fun run(){
+            override fun run() {
                 show_Time.text = curTime
-                toast("running!!!!!!!!!!!!!!")
-
+                curTime2 = curTime.toInt()
+                toast("GPS DATA RECORDING")
 
 
             }
@@ -466,6 +484,19 @@ class MotionFunction : AppCompatActivity(), MotionService.MotionListener {
             record_Gps(locationManager)
         }
     }
+
+
+    fun isWorked(): Boolean {
+        val myManager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        val runningService: ArrayList<ActivityManager.RunningServiceInfo> = myManager.getRunningServices(30) as ArrayList<ActivityManager.RunningServiceInfo>
+        for (i in 0 until runningService.size) {
+            if (runningService[i].service.getClassName().toString() == "com.example.sensortest.MotionService") {
+                return true
+            }
+        }
+        return false
+    }
+
 }
 
 

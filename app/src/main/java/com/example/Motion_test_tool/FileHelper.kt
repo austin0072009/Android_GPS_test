@@ -1,10 +1,7 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
-import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.os.Environment
-import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.toast

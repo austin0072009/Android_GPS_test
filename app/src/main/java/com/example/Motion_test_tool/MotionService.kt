@@ -1,4 +1,4 @@
-package com.example.sensortest
+package com.example.Motion_test_tool
 
 import android.Manifest
 import android.app.*
@@ -14,7 +14,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
-import android.telecom.Call
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import org.jetbrains.anko.toast
@@ -37,7 +36,6 @@ class MotionService : Service() {
     // GPS record var
 
     var acce_Gps : Vector<Float> = Vector<Float>()
-
     var latitudeGps : Vector<Double> = Vector<Double>()
     var longititueGps : Vector<Double> = Vector<Double>()
     var headingGps : Vector<Float> = Vector<Float>()
